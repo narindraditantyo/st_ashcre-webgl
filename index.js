@@ -1,3 +1,13 @@
+/*
+    Final Project - Computer Graphics
+
+    Anggota kelompok:
+    1. Gerardo Axel Lwiantoro - 2201766406
+    2. Gregorius Agung Narindra Aditantyo - 2201783154
+    3. Ralief Langga Rivansyah - 2201840290
+    4. Ray Wilmer Wijoyo - 2201771394
+*/
+
 import * as THREE from './three.js/build/three.module.js'
 import { OrbitControls } from './three.js/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from './three.js/examples/jsm/loaders/GLTFLoader.js'
@@ -237,8 +247,6 @@ let assembleStreetlamp = () => {
 
         posX += 40
     }
-
-    
 }
 
 let createText = (inputText, posY) => {
@@ -285,10 +293,12 @@ let init = () => {
 
     scene = new THREE.Scene()
 
+    // Third Person Camera
     cameraTPV = new THREE.PerspectiveCamera(45, sWidth/sHeight, 0.1, 5000)
     cameraTPV.position.set(-12.5, 25, 250)
     cameraTPV.lookAt(0, 0, 0)
 
+    // First Person Camera
     cameraFPV = new THREE.PerspectiveCamera(45, sWidth/sHeight, 0.1, 5000)
     cameraFPV.position.set(7.5, 7.5, 85)
     cameraFPV.lookAt(7.5, 7.5, -250)
@@ -307,8 +317,9 @@ let init = () => {
     window.addEventListener('resize', () => {
         sWidth = window.innerWidth
         sHeight = window.innerHeight
-        camera.aspect = sWidth/sHeight
         renderer.setSize(sWidth, sHeight)
+        camera.aspect = sWidth/sHeight
+        camera.updateProjectionMatrix()
     })
 
     window.addEventListener('keydown', (event) => {
@@ -325,7 +336,6 @@ let init = () => {
         control.addEventListener('change', renderer)
         control.maxDistance = 250
         control.maxPolarAngle = Math.PI/2.125
-        control.target.clamp
     }
 
     // Background
